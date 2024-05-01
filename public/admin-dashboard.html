@@ -1,0 +1,85 @@
+<!-- volunteer_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Dashboard</title>
+    <style>
+    /* body {
+        font-family: Arial, sans-serif;
+        justify-content: center;
+        align-items: center;
+        padding-top: 200px;
+        background-image: url(https://images.unsplash.com/photo-1653419831613-56ed2a1c8ea8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+        color: #fff;
+    }
+    
+    h1 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 2.5rem;
+    }
+    
+    #user-name-placeholder {
+        font-weight: bold;
+    }
+     */
+     body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url(https://images.unsplash.com/photo-1653419831613-56ed2a1c8ea8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1); /* Glass morph background color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    backdrop-filter: blur(11.5px);
+    -webkit-backdrop-filter: blur(11.5px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Lighter glass morph background color on hover */
+}
+
+   </style>
+</head>
+<body>
+    <h1>Welcome back Admin</h1>
+    <a href="/dashboard/admin"><button>Approve Volunteers</button></a>
+    <a href="/dashboard/participants"><button>Registerations</button></a>
+    <a href="/attendance"><button>Mark attendance</button></a>
+
+    <!-- Other dashboard content can go here -->
+    <script>
+        // JavaScript to populate the user's name
+        const userNamePlaceholder = document.getElementById('user-name-placeholder');
+        const userName = '<%= userName %>'; // This will be replaced with the actual user's name from the backend
+        userNamePlaceholder.textContent = userName;
+    </script>
+</body>
+</html>

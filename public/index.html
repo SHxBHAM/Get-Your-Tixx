@@ -1,0 +1,233 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register Form</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+    }
+    
+    h2 {
+        margin-bottom: 20px;
+    }
+    
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    </style>
+</head>
+<body>
+    <h2>Register Form</h2>
+    <form id="registerForm" action="/register" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="college">College:</label><br>
+        <input type="text" id="college" name="college" required><br>
+
+        <label for="number">Number:</label><br>
+        <input type="text" id="number" name="number" required><br>
+
+        <label for="role">Role:</label><br>
+        <select id="role" name="role" required>
+            <option value="">Select Role</option>
+            <option value="volunteer">Volunteer</option>
+            <option value="participant">Participant</option>
+        </select><br>
+
+        <div id="passwordField" style="display: none;">
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br>
+        </div>
+
+        <button type="submit">Register</button>
+        <a href="/login">yo</a>
+    </form>
+
+    <script>
+        document.getElementById('role').addEventListener('change', function() {
+            if (this.value === 'volunteer') {
+                document.getElementById('passwordField').style.display = 'block';
+            } else {
+                document.getElementById('passwordField').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register Form</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        justify-content: center;
+        align-items: center;
+        padding-top: 200px;
+        background-image:url(https://images.unsplash.com/photo-1653419831613-56ed2a1c8ea8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D) ;
+
+    }
+    #login{
+        padding: 7.8px 28px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    h2 {
+        margin-bottom: 20px;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.875rem;
+
+    }
+    
+    form {
+            background: rgba( 255, 255, 255, 0.1 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 11.5px );
+    -webkit-backdrop-filter: blur( 11.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 10px;
+    
+    }
+    
+    label {
+        display: block;
+        /* margin-bottom: 0px; */
+        color: #fff;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+   input{
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    opacity: 0.5;
+   }
+    select {
+        
+        width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    opacity: 0.5;
+    }
+    
+    button {
+        background-color: #D904CB;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #AAAEE3;
+        color: black;
+    }
+    #login{
+        background: transparent;
+        color: black;
+        border: 1px solid white;
+        color: white;
+        
+
+    }
+    #login:hover{
+        background-color: #AAAEE3;
+        color: black;
+    }
+    </style>
+</head>
+<body>
+    <h2>Register Form</h2>
+    <form id="registerForm" action="/register" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="college">College:</label><br>
+        <input type="text" id="college" name="college" required><br>
+
+        <label for="number">Number:</label><br>
+        <input type="text" id="number" name="number" required><br>
+
+        <label for="role">Role:</label><br>
+        <select id="role" name="role" required>
+            <option value="">Select Role</option>
+            <option value="volunteer">Volunteer</option>
+            <option value="participant">Participant</option>
+        </select><br>
+
+        <div id="passwordField" style="display: none;">
+            <label for="password">Set Password:</label><br>
+            <input type="password" id="password" name="password"><br>
+        </div>
+        
+        <button type="submit">Register</button>
+        <a href="/login" id="login" >Login</a>
+    </form>
+    
+
+    <script>
+        document.getElementById('role').addEventListener('change', function() {
+            if (this.value === 'volunteer') {
+                document.getElementById('passwordField').style.display = 'block';
+            } else {
+                document.getElementById('passwordField').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

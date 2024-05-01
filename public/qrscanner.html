@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url(https://images.unsplash.com/photo-1653419831613-56ed2a1c8ea8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+
+        #video {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(11.5px);
+            -webkit-backdrop-filter: blur(11.5px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 20px;
+        }
+
+        #content {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Scanner</h1>
+    <video id="video" playsinline></video>
+    <div id="content"></div>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@2.0.0/jsQR.js"></script>
+    <script src="scanner.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+<script>
+    const video = document.getElementById('video');
+
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+        .then(stream => {
+            video.srcObject = stream;
+            video.play();
+            scanQRCode();
+        })
+        .catch(err => console.error('Error accessing camera:', err));
+    
+    function scanQRCode() {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        let scanning = true;
+    
+        video.addEventListener('loadedmetadata', () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+        });
+    
+        const scanFrame = () => {
+            if (!scanning) return;
+    
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height);
+    
+            if (code) {
+                console.log('QR code detected:', code.data);
+                sendDataToBackend(code.data); // Send data to backend
+                showScanSuccess(() => {
+                    scanning = true; // Resume scanning after the user clicks OK
+                });
+            }
+            
+            requestAnimationFrame(scanFrame);
+        };
+    
+        scanFrame();
+    }
+    
+    function sendDataToBackend(qrData) {
+        // Define the endpoint where you want to send the data
+        const endpoint = '/processQRCode';
+    
+        // Define the data you want to send
+        const data = { qrData: qrData };
+    
+        // Make an HTTP POST request to the backend
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to send QR data to the server');
+            }
+            console.log('QR data sent successfully to the server');
+        })
+        .catch(error => {
+            console.error('Error sending QR data to the server:', error);
+        });
+    }
+
+    function showScanSuccess(callback) {
+        if (confirm('Scan successful! Click OK to scan again.')) {
+            callback();
+        }
+    }
+</script>
+</html>

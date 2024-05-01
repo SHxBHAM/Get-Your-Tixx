@@ -1,0 +1,107 @@
+<!-- admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        justify-content: center;
+        align-items: center;
+        padding-top: 200px;
+        background-image: url(https://images.unsplash.com/photo-1653419831613-56ed2a1c8ea8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+        color: #fff;
+    }
+    
+    h1 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 2.5rem;
+    }
+    
+    #volunteers-list {
+        margin-top: 20px;
+    }
+    
+    div {
+        margin-bottom: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(11.5px);
+        -webkit-backdrop-filter: blur(11.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 10px;
+    }
+    
+    p {
+        margin: 0;
+        color: black;
+    }
+    
+    button {
+        background-color: #D904CB;
+        color: black;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #AAAEE3;
+        color: black;
+    }
+    
+    hr {
+        border-color: #fff;
+    }
+    
+    </style>
+</head>
+<body>
+    <h1>Volunteers Waiting for Approval</h1>
+    <div id="volunteers-list"></div>
+
+    <script>
+        // JavaScript to populate the list of volunteers
+        const volunteersList = document.getElementById('volunteers-list');
+        const volunteers = <%= JSON.stringify(volunteers) %>; // This will be replaced with the actual volunteer data from the backend
+
+        volunteers.forEach(volunteer => {
+            const volunteerElement = document.createElement('div');
+            volunteerElement.innerHTML = `
+                <p>Name: ${volunteer.name}</p>
+                <p>Email: ${volunteer.email}</p>
+                <p>College: ${volunteer.college}</p>
+                <button onclick="approveVolunteer('${volunteer._id}')">Approve</button>
+                <hr>
+            `;
+            volunteersList.appendChild(volunteerElement);
+        });
+
+        // Function to approve a volunteer
+        async function approveVolunteer(volunteerId) {
+            try {
+                const response = await fetch('/approve', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ volunteerId })
+                });
+
+                if (response.ok) {
+                    // Refresh the page to reflect the updated volunteer list
+                    window.location.reload();
+                } else {
+                    console.error('Failed to approve volunteer');
+                }
+            } catch (error) {
+                console.error('Error approving volunteer:', error);
+            }
+        }
+    </script>
+</body>
+</html>

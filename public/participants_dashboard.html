@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participants Dashboard</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    padding-top: 200px;
+    background-image: url(https://images.unsplash.com/photo-1653419831613-56ed2a1c8ea8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    color: #fff;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+#participants-list {
+    margin-top: 20px;
+}
+
+div {
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(11.5px);
+    -webkit-backdrop-filter: blur(11.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 10px;
+}
+
+p {
+    margin: 0;
+    color: black;
+}
+
+hr {
+    border-color: #fff;
+}
+
+    </style>
+</head>
+<body>
+    <body>
+    <h1>List of Participants</h1>
+    <div id="participants-list"></div>
+
+    <script>
+        const participantsList = document.getElementById('participants-list');
+        const participants = <%= JSON.stringify(participants) %>; // This will be replaced with the actual participant data from the backend
+
+        participants.forEach(participant => {
+            const participantElement = document.createElement('div');
+            const status = participant.isPresent ? 'Present' : 'Absent';
+            participantElement.innerHTML = `
+                <p>Name: ${participant.name}</p>
+                <p>Email: ${participant.email}</p>
+                <p>College: ${participant.college}</p>
+                <p>Status: ${status}</p>
+                <hr>
+            `;
+            participantsList.appendChild(participantElement);
+        });
+    </script>
+</body>
+</html>
